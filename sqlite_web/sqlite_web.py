@@ -566,13 +566,13 @@ def table_import(table):
             # we'll just translate the stream into utf8-decoded unicode.
             if not PY2:
                 try:
-                    stream = TextIOWrapper(file_obj, encoding='utf8')
+                    stream = TextIOWrapper(file_obj, encoding='utf-8-sig')
                 except AttributeError:
                     # The SpooledTemporaryFile used by werkzeug does not
                     # implement an API that the TextIOWrapper expects, so we'll
                     # just consume the whole damn thing and decode it.
                     # Fixed in werkzeug 0.15.
-                    stream = StringIO(file_obj.read().decode('utf8'))
+                    stream = StringIO(file_obj.read().decode('utf-8-sig'))
             else:
                 stream = file_obj.stream
 
